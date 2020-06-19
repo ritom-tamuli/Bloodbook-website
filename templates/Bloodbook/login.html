@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en" dir="ltr">
+ <head>
+   <meta charset="utf-8">
+   <title>BloodBook | Login</title>
+   <link href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="{% static "css/style.css" %}">
+   <link rel="shortcut icon" href="{% static "images/favicon.ico" %}">
+ </head>
+
+ <body>
+   <div class="container">
+     <div class="top-container">
+       <nav>
+         <div class="logo">
+           <a href="/"><span>B</span>lood<span>B</span>ook</a>
+         </div>
+         <ul>
+           <li><a href="/">Home</a></li>
+           <li><a href="{% url 'Bloodbook:about' %}">About Us</a></li>
+         </ul>
+       </nav>
+      <div class="Loginbox">
+        <h1>Login</h1>
+        <form class="form" action="{% url 'Bloodbook:user_login' %}" method="post">
+          {% csrf_token %}
+          <input type="text" name="username"  placeholder="Username"><br><br>
+          <input type="password" name="password" placeholder="Password"><br><br>
+          <input class="butn" type="submit" name="btn" value="Login">
+        </form>
+      </div>
+     </div>
+     <div class="bottom-container">
+       <a class="footer-link" href="https://www.linkedin.com/">LinkedIn</a>
+       <a class="footer-link" href="https://twitter.com/">Twitter</a>
+       <a class="footer-link" href="https://www.facebook.com/">Facebook</a>
+       <p class="copyright">&copy 2019 BloodBook</p>
+     </div>
+   </div>
+ </body>
+</html>

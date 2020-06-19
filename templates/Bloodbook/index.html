@@ -1,0 +1,57 @@
+ <!DOCTYPE html>
+ {% load staticfiles %}
+<html lang="en" dir="ltr">
+  <head>
+      <meta charset="utf-8">
+      <title>BloodBook | Donate and Search</title>
+      <link href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="{% static "css/style.css" %}">
+      <link rel="shortcut icon" href="{% static "images/favicon.ico" %}">
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="top-container">
+        <nav>
+          <div class="logo">
+            <a href="/"><span>B</span>lood<span>B</span>ook</a>
+          </div>
+          <ul>
+            <li><a href="{% url 'Bloodbook:about' %}">About Us</a></li>
+            {% if user.is_authenticated %}
+              <li><a href="{% url 'Bloodbook:search' %}">Search</a></li>
+              <li><a class="butn" href="{% url 'logout' %}">Log Out</a></li>
+            {% else %}
+              <li><a class="butn" href="{% url 'Bloodbook:user_login' %}">Log In</a></li>
+            {% endif %}
+          </ul>
+        </nav>
+        <div class="text">
+          {% if user.is_authenticated %}
+            <h1>Hi, {{request.user.first_name}}</h1>
+            <h3>Thank you for joining BloodBook.</h3><h3>Other features coming soon.</h3>
+          {% else %}
+            <h1>Join us,</h1>
+            <h3>Do you feel like you don’t have much to offer to society? <br>You have the most valuable resource of all,<br> the ability to save a life by donating blood!<br> Help share this invaluable gift with someone in need.<br>Join the journey with BloodBook.</h3><br>
+            <a class="butn" href="{% url 'Bloodbook:register' %}">Register</a>
+          {% endif %}
+        </div>
+        <div class="image">
+          <img src="{% static "images/drop.svg" %}" alt="blood-drop-image">
+        </div>
+      </div>
+      <div class="middle-container">
+        <div class="text-mid">
+          <p>As indicated by the World Health Organization, Southeast Asia's estimated blood requirement is about 16 million units per year,out of which it collects just about 9.4 million units
+             a year, leaving a huge gap of 6 million units.India with its gigantic population of over 1 billion is lagging behind in blood collection. India has 2433 blood donation centers that can gather 9 million units of blood every year, except gathers just 7 million.Blood donors in India, mainly include three broad categories, which are - voluntary donors, replacement donors and professional donors. Most of the donations are a result of replacement donations, which are nonremunerated donations, provided by the relatives of patients who need blood either on urgent basis or for anticipated transfusion during planned surgeries. Professional donors are those who generally donate blood in exchange for money. Such donations, unethical and illegal, thrive due to dearth of voluntary donors and illiteracy and ignorance of those who need blood but refrain from donating it. </p>
+        </div>
+      </div>
+      <div class="bottom-container">
+        <a class="footer-link" href="https://www.linkedin.com/">LinkedIn</a>
+        <a class="footer-link" href="https://twitter.com/">Twitter</a>
+        <a class="footer-link" href="https://www.facebook.com/">Facebook</a>
+        <p class="copyright">&copy 2019 BloodBook</p>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en" dir="ltr">
+ <head>
+   <meta charset="utf-8">
+   <title>BloodBook | Search</title>
+   <link href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="{% static "css/style.css" %}">
+   <link rel="shortcut icon" href="{% static "images/favicon.ico" %}">
+ </head>
+
+ <body>
+   <div class="container">
+     <div class="top-container">
+       <nav>
+         <div class="logo">
+           <a href="/"><span>B</span>lood<span>B</span>ook</a>
+         </div>
+         <ul>
+           <li><a href="/">Home</a></li>
+           <li><a href="{% url 'Bloodbook:about' %}">About Us</a></li>
+           {% if user.is_authenticated %}
+             <li><a class="butn" href="{% url 'logout' %}">Log Out</a></li>
+           {% else %}
+             <li><a class="butn" href="{% url 'Bloodbook:user_login' %}">Log In</a></li>
+           {% endif %}
+         </ul>
+       </nav>
+       <div class="text">
+         {% if user.is_authenticated %}
+           <h1>Hi, {{request.user.first_name}}</h1>
+           <h3>Scroll down to view the donors list.</h3><h3>Other features coming soon.</h3>
+         {% endif %}
+       </div>
+       <div class="image">
+         <img src="{% static "images/drop.svg" %}" alt="blood-drop-image">
+       </div>
+     </div>
+     <div class="middle-container">
+       <div class="text-mid">
+         {% if User_info %}
+            <table>
+                <thead>
+                  <th>State</th>
+                  <th>City</th>
+                  <th>Name</th>
+                  <th>Blood Group</th>
+                  <th>Phone no.</th>
+                </thead>
+                {% for usr in User_info %}
+                <tr>
+                  <td>{{ usr.state }}</td>
+                  <td>{{ usr.city }}</td>
+                  <td>{{ usr.user.first_name}}</td>
+                  <td>{{ usr.BloodGroup }}</td>
+                  <td>{{ usr.phno }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+          {% else %}
+            <p>NO RECORDS FOUND IN DATABASE</p>
+          {% endif %}
+       </div>
+     </div>
+     <div class="bottom-container">
+       <a class="footer-link" href="https://www.linkedin.com/">LinkedIn</a>
+       <a class="footer-link" href="https://twitter.com/">Twitter</a>
+       <a class="footer-link" href="https://www.facebook.com/">Facebook</a>
+       <p class="copyright">&copy 2019 BloodBook</p>
+     </div>
+   </div>
+ </body>
+</html>
